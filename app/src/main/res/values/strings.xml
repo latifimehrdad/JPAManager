@@ -18,6 +18,10 @@
     <string name="doYouWantToExitApp">آیا برای خروج از برنامه مطمئن هستید؟</string>
     <string name="newIp">new ip</string>
     <string name="ipPassword">ip password</string>
+    <string name="comfortableSpace">فضایی راحت</string>
+    <string name="processManagement">برای مدیریت فرآیندهایتان</string>
+    <string name="exclamationMark">!</string>
+    <string name="forgetPassword">فراموشی رمز عبور</string>
 
 
 

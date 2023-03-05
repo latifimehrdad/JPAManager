@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_margin="@dimen/_5sdp">
+
+    <ImageView
+        android:id="@+id/imageViewHistory"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageViewUpdate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_9sdp"
+        android:contentDescription="@string/imageViewHistory" />
+
+
+    <ImageView
+        android:id="@+id/imageViewUpdate"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewHistory"
+        app:layout_constraintEnd_toStartOf="@id/imageViewHome"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_9sdp"
+        android:contentDescription="@string/imageViewUpdate" />
+
+
+
+    <ImageView
+        android:id="@+id/imageViewHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewUpdate"
+        app:layout_constraintEnd_toStartOf="@id/imageViewShelf"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_9sdp"
+        android:contentDescription="@string/imageViewHome" />
+
+    <ImageView
+        android:id="@+id/imageViewShelf"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_9sdp"
+        android:contentDescription="@string/imageViewShelf" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

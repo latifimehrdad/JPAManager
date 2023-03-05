@@ -10,9 +10,6 @@ import com.hoomanholding.jpamanager.databinding.FragmentSplashBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.zar.core.enums.EnumApiError
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 
 /**
  * Created by m-latifi on 11/8/2022.
@@ -25,13 +22,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     private val splashViewModel: SplashViewModel by viewModels()
 
-    private var job: Job? = null
-
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonReTry.setOnClickListener { checkUserIsLogged() }
-        checkUserIsLogged()
+        setListener()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -45,10 +39,18 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- showMessage
 
 
+
+    //---------------------------------------------------------------------------------------------- setListener
+    private fun setListener() {
+        binding.materialButtonLogin.setOnClickListener {
+            checkUserIsLogged()
+        }
+    }
+    //---------------------------------------------------------------------------------------------- setListener
+
+
     //---------------------------------------------------------------------------------------------- checkUserIsLogged
     private fun checkUserIsLogged() {
-        if (binding.buttonReTry.isLoading)
-            return
         if (splashViewModel.userIsEntered())
             gotoFragmentHome()
         else
@@ -59,12 +61,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
     private fun gotoFragmentLogin() {
-        job = CoroutineScope(IO).launch {
-            delay(3000)
-            withContext(Main) {
-                findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-            }
-        }
+        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentLogin
 
@@ -73,7 +70,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     private fun gotoFragmentHome() {
         observeErrorLiveDate()
         observeSuccessLiveDataLiveData()
-        startLoading()
         splashViewModel.requestGetData()
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
@@ -82,7 +78,6 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- observeLoginLiveDate
     private fun observeErrorLiveDate() {
         splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
-            stopLoading()
             showMessage(it.message)
             when (it.type) {
                 EnumApiError.UnAuthorization -> (activity as MainActivity?)?.gotoFirstFragment()
@@ -104,22 +99,5 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
     }
     //---------------------------------------------------------------------------------------------- observeSuccessLiveDataLiveData
-
-
-
-    //---------------------------------------------------------------------------------------------- startLoading
-    private fun startLoading() {
-        binding.buttonReTry.visibility = View.GONE
-        binding.buttonReTry.startLoading("")
-    }
-    //---------------------------------------------------------------------------------------------- startLoading
-
-
-    //---------------------------------------------------------------------------------------------- stopLoading
-    private fun stopLoading() {
-        binding.buttonReTry.stopLoading()
-        binding.buttonReTry.visibility = View.VISIBLE
-    }
-    //---------------------------------------------------------------------------------------------- stopLoading
 
 }

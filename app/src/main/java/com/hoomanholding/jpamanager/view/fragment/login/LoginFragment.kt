@@ -74,12 +74,8 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         activity?.let { (it as MainActivity).deleteAllData() }
         if (loginViewModel.isBiometricEnable()) {
             binding.cardViewFingerPrint.visibility = View.VISIBLE
-            binding.viewLine1.visibility = View.VISIBLE
-            binding.viewLine2.visibility = View.VISIBLE
         } else {
             binding.cardViewFingerPrint.visibility = View.INVISIBLE
-            binding.viewLine1.visibility = View.GONE
-            binding.viewLine2.visibility = View.GONE
         }
         observeLiveDate()
     }
@@ -126,6 +122,10 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     //---------------------------------------------------------------------------------------------- setListener
     private fun setListener() {
 
+        binding.textViewForgetPassword.setOnClickListener {
+
+        }
+
         binding
             .buttonLogin
             .setOnClickListener { login(false) }
@@ -134,7 +134,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             .cardViewFingerPrint
             .setOnClickListener { showBiometricDialog() }
 
-        binding.frameLayoutLogo.setOnLongClickListener {
+        binding.imageViewLogo.setOnLongClickListener {
             if (context != null) {
                 val dialog = DialogManager().createDialogHeightWrapContent(
                     requireContext(),

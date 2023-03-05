@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@id/imageViewWave"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.8"
+                app:layout_constraintWidth_percent="0.75"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:paddingVertical="@dimen/_15sdp">
 
@@ -96,6 +96,8 @@
                     app:boxCornerRadiusTopStart="@dimen/_20sdp"
                     app:passwordToggleEnabled="true"
                     android:layoutDirection="rtl"
+                    app:startIconDrawable="@drawable/ic_pass"
+                    app:startIconTint="@color/white"
                     app:passwordToggleTint="@color/white"
                     app:boxStrokeColor="@color/primaryColor"
                     app:hintTextColor="@color/white"
@@ -129,8 +131,8 @@
                     app:backgroundTint="@null"
                     android:background="@drawable/drawable_button"
                     android:textSize="@dimen/_12sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_7sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:textColor="@color/primaryColorVariant"
                     android:text='@string/enter' />
@@ -146,7 +148,7 @@
                     android:textSize="@dimen/_10sdp"
                     android:text="@string/forgetPassword"
                     android:textColor="@color/hint"
-                    android:fontFamily="@font/iransans_medium" />
+                    android:fontFamily="@font/iransans_medium"/>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
