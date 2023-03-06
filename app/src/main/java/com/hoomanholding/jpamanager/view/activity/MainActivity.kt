@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -60,28 +58,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.menuHome.setOnClickListener {
-
+            gotoFragment(R.id.action_goto_HomeFragment)
         }
 
         binding.menuCardboard.setOnClickListener {
-            if (!binding.menuCardboard.isSelectedMenu()) {
-                resetMenuColor()
-                binding.menuCardboard.selected()
-            }
+            gotoFragment(R.id.action_goto_CardBoardFragment)
         }
 
         binding.menuReport.setOnClickListener {
-            if (!binding.menuReport.isSelectedMenu()) {
-                resetMenuColor()
-                binding.menuReport.selected()
-            }
+            gotoFragment(R.id.action_goto_ReportFragment)
         }
 
         binding.menuProfile.setOnClickListener {
-            if (!binding.menuProfile.isSelectedMenu()) {
-                resetMenuColor()
-                binding.menuProfile.selected()
-            }
+            gotoFragment(R.id.action_goto_ProfileFragment)
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
@@ -99,13 +88,27 @@ class MainActivity : AppCompatActivity() {
                 binding.menuProfile.visibility = View.GONE
             }
             "HomeFragment" -> {
-                binding.menuHome.visibility = View.VISIBLE
-                binding.menuCardboard.visibility = View.VISIBLE
-                binding.menuReport.visibility = View.VISIBLE
-                binding.menuProfile.visibility = View.VISIBLE
                 if (!binding.menuHome.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuHome.selected()
+                }
+            }
+            "ReportFragment" -> {
+                if (!binding.menuReport.isSelectedMenu()) {
+                    resetMenuColor()
+                    binding.menuReport.selected()
+                }
+            }
+            "ProfileFragment" -> {
+                if (!binding.menuProfile.isSelectedMenu()) {
+                    resetMenuColor()
+                    binding.menuProfile.selected()
+                }
+            }
+            "CardBoardFragment" -> {
+                if (!binding.menuCardboard.isSelectedMenu()) {
+                    resetMenuColor()
+                    binding.menuCardboard.selected()
                 }
             }
         }
@@ -115,6 +118,10 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
+        binding.menuHome.visibility = View.VISIBLE
+        binding.menuCardboard.visibility = View.VISIBLE
+        binding.menuReport.visibility = View.VISIBLE
+        binding.menuProfile.visibility = View.VISIBLE
         binding.menuHome.clearSelected()
         binding.menuCardboard.clearSelected()
         binding.menuReport.clearSelected()
@@ -122,29 +129,6 @@ class MainActivity : AppCompatActivity() {
     }
     //---------------------------------------------------------------------------------------------- resetMenuColor
 
-
-    //---------------------------------------------------------------------------------------------- resetImageNavigationMenu
-    private fun resetImageNavigationMenu(imageIcon: ImageView) {
-        imageIcon.setColorFilter(
-            ContextCompat.getColor(this, R.color.white),
-            android.graphics.PorterDuff.Mode.SRC_IN
-        )
-        imageIcon.scaleX = 0.75f
-        imageIcon.scaleY = 0.75f
-    }
-    //---------------------------------------------------------------------------------------------- resetImageNavigationMenu
-
-
-    //---------------------------------------------------------------------------------------------- selectCurrentMenu
-    private fun selectCurrentMenu(imageIcon: ImageView) {
-        imageIcon.setColorFilter(
-            ContextCompat.getColor(this, R.color.primaryColor),
-            android.graphics.PorterDuff.Mode.SRC_IN
-        )
-        imageIcon.scaleX = 1.2f
-        imageIcon.scaleY = 1.2f
-    }
-    //---------------------------------------------------------------------------------------------- selectCurrentMenu
 
 
     //---------------------------------------------------------------------------------------------- showMessage

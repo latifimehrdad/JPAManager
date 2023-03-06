@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.view.fragment.splash
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hoomanholding.jpamanager.JpaFragment
@@ -10,6 +11,11 @@ import com.hoomanholding.jpamanager.databinding.FragmentSplashBinding
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.zar.core.enums.EnumApiError
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 /**
  * Created by m-latifi on 11/8/2022.
@@ -25,7 +31,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
     //---------------------------------------------------------------------------------------------- onViewCreated
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.imageViewManegerApp.visibility = View.INVISIBLE
+        binding.materialButtonLogin.visibility = View.INVISIBLE
         setListener()
+        startAnimation()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
@@ -51,6 +60,40 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
     }
     //---------------------------------------------------------------------------------------------- setListener
+
+
+
+    //---------------------------------------------------------------------------------------------- startAnimation
+    private fun startAnimation() {
+        CoroutineScope(Main).launch {
+            delay(1000)
+            if (context != null) {
+                binding.imageViewManegerApp.animation = null
+                binding.materialButtonLogin.animation = null
+                val slideInLeft =
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_left)
+                binding.imageViewManegerApp.startAnimation(slideInLeft)
+                val slideInBottom =
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.slide_in_bottom)
+                binding.materialButtonLogin.startAnimation(slideInBottom)
+                binding.imageViewManegerApp.visibility = View.VISIBLE
+                binding.materialButtonLogin.visibility = View.VISIBLE
+            }
+        }
+
+        CoroutineScope(Main).launch {
+            delay(2000)
+            if (context != null) {
+                binding.imageViewManegerApp.animation = null
+                binding.imageViewManegerApp.visibility = View.INVISIBLE
+                val alpha =
+                    AnimationUtils.loadAnimation(requireContext(), R.anim.alpha)
+                binding.imageViewManegerApp.startAnimation(alpha)
+                binding.imageViewManegerApp.visibility = View.VISIBLE
+            }
+        }
+    }
+    //---------------------------------------------------------------------------------------------- startAnimation
 
 
     //---------------------------------------------------------------------------------------------- checkUserIsLogged

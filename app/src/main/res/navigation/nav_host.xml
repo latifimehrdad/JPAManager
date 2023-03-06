@@ -39,6 +39,21 @@
         android:label="HomeFragment"/>
 
 
+    <fragment
+        android:id="@+id/ReportFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.report.ReportFragment"
+        android:label="ReportFragment"/>
+
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.profile.ProfileFragment"
+        android:label="ProfileFragment"/>
+
+    <fragment
+        android:id="@+id/CardBoardFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.cardboard.CardBoardFragment"
+        android:label="CardBoardFragment"/>
+
     <action
         android:id="@+id/action_goto_SplashFragment"
         app:destination="@id/splashFragment"
@@ -47,6 +62,45 @@
         app:popEnterAnim="@anim/slide_in_right"
         app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/splashFragment"
+        app:launchSingleTop="true"/>
+
+    <action
+        android:id="@+id/action_goto_HomeFragment"
+        app:destination="@id/HomeFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/HomeFragment"
+        app:launchSingleTop="true"/>
+
+    <action
+        android:id="@+id/action_goto_ReportFragment"
+        app:destination="@id/ReportFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/ReportFragment"
+        app:launchSingleTop="true"/>
+
+    <action
+        android:id="@+id/action_goto_ProfileFragment"
+        app:destination="@id/ProfileFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/ProfileFragment"
+        app:launchSingleTop="true"/>
+    <action
+        android:id="@+id/action_goto_CardBoardFragment"
+        app:destination="@id/CardBoardFragment"
+        app:enterAnim="@anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@anim/slide_out_left"
+        app:popUpTo="@id/CardBoardFragment"
         app:launchSingleTop="true"/>
 
 </navigation>
