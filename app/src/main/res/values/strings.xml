@@ -22,14 +22,15 @@
     <string name="processManagement">برای مدیریت فرآیندهایتان</string>
     <string name="exclamationMark">!</string>
     <string name="forgetPassword">فراموشی رمز عبور</string>
+    <string name="cardboard">کارتابل</string>
+    <string name="home">خانه</string>
+    <string name="report">گزارش</string>
+    <string name="profile">پروفایل</string>
 
 
 
     <string name="logoDescription">logo</string>
     <string name="fingerPrintDescription">fingerPrint</string>
-    <string name="imageViewHistory">imageViewHistory</string>
-    <string name="imageViewUpdate">imageViewUpdate</string>
-    <string name="imageViewHome">imageViewHome</string>
-    <string name="imageViewShelf">imageViewShelf</string>
+    <string name="iconDescription">icon</string>
 
 </resources>

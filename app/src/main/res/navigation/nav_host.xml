@@ -17,12 +17,26 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
 
+        <action
+            android:id="@+id/action_splashFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
     </fragment>
 
     <fragment
         android:id="@+id/LoginFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.login.LoginFragment"
         android:label="LoginFragment"/>
+
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.home.HomeFragment"
+        android:label="HomeFragment"/>
 
 
     <action

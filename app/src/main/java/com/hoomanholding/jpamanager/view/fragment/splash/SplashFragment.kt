@@ -45,6 +45,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         binding.materialButtonLogin.setOnClickListener {
             checkUserIsLogged()
         }
+
+        binding.imageViewManegerApp.setOnClickListener {
+            findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -68,15 +72,14 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
     private fun gotoFragmentHome() {
-        observeErrorLiveDate()
-        observeSuccessLiveDataLiveData()
+        observeLiveDate()
         splashViewModel.requestGetData()
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
 
 
-    //---------------------------------------------------------------------------------------------- observeLoginLiveDate
-    private fun observeErrorLiveDate() {
+    //---------------------------------------------------------------------------------------------- observeLiveDate
+    private fun observeLiveDate() {
         splashViewModel.errorLiveDate.observe(viewLifecycleOwner) {
             showMessage(it.message)
             when (it.type) {
@@ -84,20 +87,13 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
                 else -> {}
             }
         }
-    }
-    //---------------------------------------------------------------------------------------------- observeLoginLiveDate
 
-
-    //---------------------------------------------------------------------------------------------- observeSuccessLiveDataLiveData
-    private fun observeSuccessLiveDataLiveData() {
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
-/*            activity?.let {main->
-                (main as MainActivity).showImageViewShelf()
-            }
             if (it)
-                findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)*/
+                findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
         }
     }
-    //---------------------------------------------------------------------------------------------- observeSuccessLiveDataLiveData
+    //---------------------------------------------------------------------------------------------- observeLiveDate
+
 
 }

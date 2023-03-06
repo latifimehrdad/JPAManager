@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@id/imageViewWave"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintWidth_percent="0.75"
+                app:layout_constraintWidth_percent="0.65"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:paddingVertical="@dimen/_15sdp">
 
@@ -76,7 +76,7 @@
                         android:maxLength="20"
                         android:singleLine="true"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:text="@={viewModel.userName}"
                         android:fontFamily="@font/iransans_medium"/>
 
@@ -113,7 +113,7 @@
                         android:hint="@string/password"
                         android:maxLength="20"
                         android:singleLine="true"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textColor="@color/white"
                         android:text="@={viewModel.password}"
                         android:fontFamily="@font/iransans_medium"/>
@@ -130,9 +130,9 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     app:backgroundTint="@null"
                     android:background="@drawable/drawable_button"
-                    android:textSize="@dimen/_12sdp"
-                    android:paddingTop="@dimen/_7sdp"
-                    android:paddingBottom="@dimen/_7sdp"
+                    android:textSize="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingBottom="@dimen/_2sdp"
                     android:fontFamily="@font/iransans_bold"
                     android:textColor="@color/primaryColorVariant"
                     android:text='@string/enter' />
@@ -145,7 +145,7 @@
                     app:layout_constraintEnd_toEndOf="@id/textInputLayoutPasscode"
                     app:layout_constraintTop_toTopOf="@id/buttonLogin"
                     app:layout_constraintBottom_toBottomOf="@id/buttonLogin"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_8sdp"
                     android:text="@string/forgetPassword"
                     android:textColor="@color/hint"
                     android:fontFamily="@font/iransans_medium"/>
@@ -154,7 +154,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cardViewFingerPrint"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="@dimen/_30sdp"
                     app:layout_constraintTop_toBottomOf="@id/buttonLogin"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="@dimen/_15sdp"
@@ -175,7 +175,7 @@
                         android:textColor="@color/white"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:paddingHorizontal="@dimen/_10sdp"
                         android:gravity="center"
                         android:fontFamily="@font/iransans_bold"

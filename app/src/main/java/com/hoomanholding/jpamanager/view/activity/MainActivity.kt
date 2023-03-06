@@ -42,13 +42,11 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- onCreate
 
 
-
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setListener()
     }
     //---------------------------------------------------------------------------------------------- initView
-
 
 
     //---------------------------------------------------------------------------------------------- setListener
@@ -60,9 +58,33 @@ class MainActivity : AppCompatActivity() {
             if (destination.label != null)
                 showAndHideBottomNavigationMenu(destination.label.toString())
         }
+
+        binding.menuHome.setOnClickListener {
+
+        }
+
+        binding.menuCardboard.setOnClickListener {
+            if (!binding.menuCardboard.isSelectedMenu()) {
+                resetMenuColor()
+                binding.menuCardboard.selected()
+            }
+        }
+
+        binding.menuReport.setOnClickListener {
+            if (!binding.menuReport.isSelectedMenu()) {
+                resetMenuColor()
+                binding.menuReport.selected()
+            }
+        }
+
+        binding.menuProfile.setOnClickListener {
+            if (!binding.menuProfile.isSelectedMenu()) {
+                resetMenuColor()
+                binding.menuProfile.selected()
+            }
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
-
 
 
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
@@ -71,23 +93,34 @@ class MainActivity : AppCompatActivity() {
         when (fragmentLabel) {
             "SplashFragment",
             "LoginFragment" -> {
-                binding.layoutFooterMenu.root.visibility = View.GONE
+                binding.menuHome.visibility = View.GONE
+                binding.menuCardboard.visibility = View.GONE
+                binding.menuReport.visibility = View.GONE
+                binding.menuProfile.visibility = View.GONE
+            }
+            "HomeFragment" -> {
+                binding.menuHome.visibility = View.VISIBLE
+                binding.menuCardboard.visibility = View.VISIBLE
+                binding.menuReport.visibility = View.VISIBLE
+                binding.menuProfile.visibility = View.VISIBLE
+                if (!binding.menuHome.isSelectedMenu()) {
+                    resetMenuColor()
+                    binding.menuHome.selected()
+                }
             }
         }
     }
     //---------------------------------------------------------------------------------------------- showAndHideBottomNavigationMenu
 
 
-
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
-/*        resetImageNavigationMenu(binding.imageViewHistory)
-        resetImageNavigationMenu(binding.imageViewUpdate)
-        resetImageNavigationMenu(binding.imageViewHome)
-        resetImageNavigationMenu(binding.imageViewShelf)*/
+        binding.menuHome.clearSelected()
+        binding.menuCardboard.clearSelected()
+        binding.menuReport.clearSelected()
+        binding.menuProfile.clearSelected()
     }
     //---------------------------------------------------------------------------------------------- resetMenuColor
-
 
 
     //---------------------------------------------------------------------------------------------- resetImageNavigationMenu
@@ -104,7 +137,6 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- selectCurrentMenu
     private fun selectCurrentMenu(imageIcon: ImageView) {
-        binding.layoutFooterMenu.root.visibility = View.VISIBLE
         imageIcon.setColorFilter(
             ContextCompat.getColor(this, R.color.primaryColor),
             android.graphics.PorterDuff.Mode.SRC_IN
@@ -133,7 +165,6 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- showMessage
 
 
-
     //---------------------------------------------------------------------------------------------- gotoFirstFragment
     fun gotoFirstFragment() {
         deleteAllData()
@@ -145,7 +176,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
     //---------------------------------------------------------------------------------------------- gotoFirstFragment
-
 
 
     //---------------------------------------------------------------------------------------------- deleteAllData
