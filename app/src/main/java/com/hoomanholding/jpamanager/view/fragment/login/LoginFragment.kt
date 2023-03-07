@@ -134,7 +134,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             .cardViewFingerPrint
             .setOnClickListener { showBiometricDialog() }
 
-        binding.imageViewLogo.setOnLongClickListener {
+        /*binding.imageViewLogo.setOnLongClickListener {
             if (context != null) {
                 val dialog = DialogManager().createDialogHeightWrapContent(
                     requireContext(),
@@ -173,7 +173,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
                 dialog.show()
             }
             return@setOnLongClickListener true
-        }
+        }*/
     }
     //---------------------------------------------------------------------------------------------- setListener
 
