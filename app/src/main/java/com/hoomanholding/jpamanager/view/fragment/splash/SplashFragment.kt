@@ -35,12 +35,14 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         binding.materialButtonLogin.visibility = View.INVISIBLE
         setListener()
         startAnimation()
+        checkUserIsLogged()
     }
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
+        binding.materialButtonLogin.stopLoading()
         activity?.let {
             (it as MainActivity).showMessage(message)
         }
@@ -115,7 +117,10 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
 
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
     private fun gotoFragmentHome() {
+        if (binding.materialButtonLogin.isLoading)
+            return
         observeLiveDate()
+        binding.materialButtonLogin.startLoading(getString(R.string.bePatient))
         splashViewModel.requestGetData()
     }
     //---------------------------------------------------------------------------------------------- gotoFragmentHome
@@ -132,6 +137,7 @@ class SplashFragment(override var layout: Int = R.layout.fragment_splash) :
         }
 
         splashViewModel.successLiveData.observe(viewLifecycleOwner) {
+            binding.materialButtonLogin.stopLoading()
             if (it)
                 findNavController().navigate(R.id.action_splashFragment_to_HomeFragment)
         }

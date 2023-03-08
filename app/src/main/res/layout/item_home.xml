@@ -14,7 +14,7 @@
             android:padding="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/drawable_border_curve">
+            android:background="@drawable/drawable_border_mini_curve">
 
 
             <TextView
@@ -93,7 +93,7 @@
             android:textSize="@dimen/_11sdp"
             android:gravity="center"
             android:lines="1"
-            android:background="@drawable/drawable_border_curve"
+            android:background="@drawable/drawable_border_mini_curve"
             android:text="15389"
             android:textColor="@color/white"
             android:fontFamily="@font/iransans_bold"

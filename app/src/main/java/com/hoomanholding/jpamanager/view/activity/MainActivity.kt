@@ -86,6 +86,8 @@ class MainActivity : AppCompatActivity() {
                 binding.menuCardboard.visibility = View.GONE
                 binding.menuReport.visibility = View.GONE
                 binding.menuProfile.visibility = View.GONE
+                binding.textViewUser.visibility = View.GONE
+                binding.textViewLogOut.visibility = View.GONE
             }
             "HomeFragment" -> {
                 if (!binding.menuHome.isSelectedMenu()) {
@@ -118,6 +120,8 @@ class MainActivity : AppCompatActivity() {
 
     //---------------------------------------------------------------------------------------------- resetMenuColor
     private fun resetMenuColor() {
+        binding.textViewUser.visibility = View.VISIBLE
+        binding.textViewLogOut.visibility = View.VISIBLE
         binding.menuHome.visibility = View.VISIBLE
         binding.menuCardboard.visibility = View.VISIBLE
         binding.menuReport.visibility = View.VISIBLE

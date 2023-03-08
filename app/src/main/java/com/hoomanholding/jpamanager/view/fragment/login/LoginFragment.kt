@@ -90,6 +90,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         }
 
         loginViewModel.loginLiveDate.observe(viewLifecycleOwner) {
+            backClick.isEnabled = false
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
 

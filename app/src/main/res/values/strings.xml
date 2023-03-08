@@ -30,11 +30,25 @@
     <string name="invoice">پیش فاکتور</string>
     <string name="check">چک</string>
     <string name="toman">تومان</string>
+    <string name="fullName">نام و نام خانوادگی</string>
+    <string name="personnelNumber">کد پرسنلی</string>
+    <string name="dot">:</string>
+    <string name="contactSupport">تماس با پشتیبانی</string>
+    <string name="hr">منابع انسانی</string>
+    <string name="sale">فروش</string>
+    <string name="financial">مالی</string>
+    <string name="indebtedness">بدهکاری</string>
+    <string name="salesAmount">مقدار فروش</string>
+    <string name="creditor">بستانکاری</string>
+    <string name="comparativeReport">گزارش مقایسه ای</string>
+    <string name="exit">خروج</string>
 
 
+    <string name="supportNumber">026-6565635</string>
 
     <string name="logoDescription">logo</string>
-    <string name="fingerPrintDescription">fingerPrint</string>
+    <string name="fingerPrintDescription">finger Print</string>
     <string name="iconDescription">icon</string>
+    <string name="profileDescription">image profile</string>
 
 </resources>
