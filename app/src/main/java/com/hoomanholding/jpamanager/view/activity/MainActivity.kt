@@ -43,6 +43,9 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setListener()
+        mainViewModel.userInfoLiveData.observe(this){
+            binding.textViewUser.text = it
+        }
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -179,5 +182,12 @@ class MainActivity : AppCompatActivity() {
     }
     //---------------------------------------------------------------------------------------------- gotoFragment
 
+
+
+    //---------------------------------------------------------------------------------------------- getUserInfo
+    fun getUserInfo() {
+        mainViewModel.getUserInfo()
+    }
+    //---------------------------------------------------------------------------------------------- getUserInfo
 
 }
