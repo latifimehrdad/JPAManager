@@ -52,7 +52,23 @@
     <fragment
         android:id="@+id/CardBoardFragment"
         android:name="com.hoomanholding.jpamanager.view.fragment.cardboard.CardBoardFragment"
-        android:label="CardBoardFragment"/>
+        android:label="CardBoardFragment">
+
+        <action
+            android:id="@+id/action_splashFragment_to_InvoiceFragment"
+            app:destination="@id/InvoiceFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/InvoiceFragment"
+        android:name="com.hoomanholding.jpamanager.view.fragment.invoice.InvoiceFragment"
+        android:label="InvoiceFragment"/>
 
     <action
         android:id="@+id/action_goto_SplashFragment"

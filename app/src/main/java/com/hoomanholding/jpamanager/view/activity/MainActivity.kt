@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     //---------------------------------------------------------------------------------------------- initView
     private fun initView() {
         setListener()
-        mainViewModel.userInfoLiveData.observe(this){
+        mainViewModel.userInfoLiveData.observe(this) {
             binding.textViewUser.text = it
         }
     }
@@ -110,7 +110,8 @@ class MainActivity : AppCompatActivity() {
                     binding.menuProfile.selected()
                 }
             }
-            "CardBoardFragment" -> {
+            "CardBoardFragment",
+            "InvoiceFragment" -> {
                 if (!binding.menuCardboard.isSelectedMenu()) {
                     resetMenuColor()
                     binding.menuCardboard.selected()
@@ -135,7 +136,6 @@ class MainActivity : AppCompatActivity() {
         binding.menuProfile.clearSelected()
     }
     //---------------------------------------------------------------------------------------------- resetMenuColor
-
 
 
     //---------------------------------------------------------------------------------------------- showMessage
@@ -181,7 +181,6 @@ class MainActivity : AppCompatActivity() {
         navController?.navigate(fragment, null)
     }
     //---------------------------------------------------------------------------------------------- gotoFragment
-
 
 
     //---------------------------------------------------------------------------------------------- getUserInfo

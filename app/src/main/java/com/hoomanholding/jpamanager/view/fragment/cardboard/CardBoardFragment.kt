@@ -3,6 +3,7 @@ package com.hoomanholding.jpamanager.view.fragment.cardboard
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
@@ -19,8 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard):
-    JpaFragment<FragmentCardboardBinding>(){
+class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard) :
+    JpaFragment<FragmentCardboardBinding>() {
 
     private val viewModel: CardboardViewModel by viewModels()
 
@@ -33,7 +34,6 @@ class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard):
     //---------------------------------------------------------------------------------------------- onViewCreated
 
 
-
     //---------------------------------------------------------------------------------------------- showMessage
     private fun showMessage(message: String) {
         activity?.let {
@@ -41,7 +41,6 @@ class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard):
         }
     }
     //---------------------------------------------------------------------------------------------- showMessage
-
 
 
     //---------------------------------------------------------------------------------------------- observeLiveData
@@ -58,12 +57,12 @@ class CardBoardFragment(override var layout: Int = R.layout.fragment_cardboard):
     //---------------------------------------------------------------------------------------------- observeLiveData
 
 
-
     //---------------------------------------------------------------------------------------------- setItemAdapter
     private fun setItemAdapter(items: List<CardBoardItemModel>) {
-        val click = object: CardBoardItemHolder.Click{
+        val click = object : CardBoardItemHolder.Click {
             override fun itemClick(action: Int) {
-
+                if (action != 0)
+                    findNavController().navigate(action)
             }
         }
         val adapter = CardBoardItemAdapter(items, click)

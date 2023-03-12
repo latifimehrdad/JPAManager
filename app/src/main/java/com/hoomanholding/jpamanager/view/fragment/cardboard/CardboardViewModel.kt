@@ -36,7 +36,7 @@ class CardboardViewModel @Inject constructor(
             CardBoardItemModel(
                 R.drawable.ic_invoice,
                 resourcesProvider.getString(R.string.invoice),
-                0
+                R.id.action_splashFragment_to_InvoiceFragment
             )
         )
         items.add(
