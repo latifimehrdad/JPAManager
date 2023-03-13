@@ -1,24 +1,30 @@
 package com.hoomanholding.jpamanager.view.fragment.login
 
-import android.accounts.AccountManager
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
+import android.view.Gravity
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 import com.hoomanholding.jpamanager.JpaFragment
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.databinding.FragmentLoginBinding
 import com.hoomanholding.jpamanager.ext.hideKeyboard
+import com.hoomanholding.jpamanager.ext.isIP
 import com.hoomanholding.jpamanager.view.activity.MainActivity
 import com.hoomanholding.jpamanager.view.dialog.ConfirmDialog
 import com.zar.core.tools.BiometricTools
+import com.zar.core.tools.manager.DialogManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -33,18 +39,6 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
     lateinit var biometricTools: BiometricTools
 
     private val loginViewModel: LoginViewModel by viewModels()
-
-
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            val accountName = intent?.extras?.getString(AccountManager.KEY_ACCOUNT_NAME)
-            val accountType = intent?.extras?.getString(AccountManager.KEY_ACCOUNT_TYPE)
-            val accountResponse = intent?.extras?.getString(AccountManager.KEY_ACCOUNT_STATUS_TOKEN)
-            Log.d("meri", "accountName : $accountName - accountType : $accountType - accountResponse : $accountResponse")
-        }
-    }
 
 
     //---------------------------------------------------------------------------------------------- OnBackPressedCallback
@@ -86,16 +80,6 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             binding.cardViewFingerPrint.visibility = View.INVISIBLE
         }
         observeLiveDate()
-        val intent = AccountManager.newChooseAccountIntent(
-            null,
-            null,
-            arrayOf("com.google"),
-            null,
-            null,
-            null,
-            null
-        )
-        startForResult.launch(intent)
     }
     //---------------------------------------------------------------------------------------------- initView
 
@@ -153,7 +137,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
             .cardViewFingerPrint
             .setOnClickListener { showBiometricDialog() }
 
-        /*binding.imageViewLogo.setOnLongClickListener {
+        binding.imageViewWave.setOnLongClickListener {
             if (context != null) {
                 val dialog = DialogManager().createDialogHeightWrapContent(
                     requireContext(),
@@ -192,7 +176,7 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
                 dialog.show()
             }
             return@setOnLongClickListener true
-        }*/
+        }
     }
     //---------------------------------------------------------------------------------------------- setListener
 
@@ -229,11 +213,14 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
 
 
     //---------------------------------------------------------------------------------------------- login
+    @SuppressLint("HardwareIds")
     private fun login(fromFingerPrint: Boolean) {
-        if (binding.buttonLogin.isLoading)
+        if (context == null || binding.buttonLogin.isLoading)
             return
         startLoading()
-        loginViewModel.login(fromFingerPrint)
+        val deviceID =
+            Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
+        loginViewModel.login(fromFingerPrint, deviceID)
     }
     //---------------------------------------------------------------------------------------------- login
 

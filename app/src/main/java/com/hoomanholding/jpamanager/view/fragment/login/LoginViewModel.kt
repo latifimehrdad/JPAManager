@@ -27,15 +27,15 @@ class LoginViewModel @Inject constructor(
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    val loginLiveDate : SingleLiveEvent<String?> by lazy { SingleLiveEvent<String?>() }
-    val userNameError : SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
-    val passwordError : SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
-    val userName : MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val password : MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    val loginLiveDate: SingleLiveEvent<String?> by lazy { SingleLiveEvent<String?>() }
+    val userNameError: SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
+    val passwordError: SingleLiveEvent<String> by lazy { SingleLiveEvent<String>() }
+    val userName: MutableLiveData<String> by lazy { MutableLiveData<String>() }
+    val password: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
 
     //---------------------------------------------------------------------------------------------- login
-    fun login(fromFingerPrint: Boolean) {
+    fun login(fromFingerPrint: Boolean, deviceID: String) {
         if (fromFingerPrint)
             setUserNamePasswordFromSharePreferences()
         var valueIsEmpty = false
@@ -48,14 +48,13 @@ class LoginViewModel @Inject constructor(
             valueIsEmpty = true
         }
         if (!valueIsEmpty)
-            requestLogin()
+            requestLogin(deviceID)
     }
     //---------------------------------------------------------------------------------------------- login
 
 
-
     //---------------------------------------------------------------------------------------------- requestLogin
-    private fun requestLogin() {
+    private fun requestLogin(deviceID: String) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataSendingIsEmpty))
@@ -86,7 +85,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- setUserNamePasswordFromSharePreferences
-    fun setUserNamePasswordFromSharePreferences() {
+    private fun setUserNamePasswordFromSharePreferences() {
         userName.value = sharedPreferences.getString(CompanionValues.userName, "")
         password.value = sharedPreferences.getString(CompanionValues.password, "")
     }
@@ -107,7 +106,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- saveNewIp
-    fun saveNewIp(ip : String?) {
+    fun saveNewIp(ip: String?) {
         sharedPreferences
             .edit()
             .putString(CompanionValues.URL, ip)
