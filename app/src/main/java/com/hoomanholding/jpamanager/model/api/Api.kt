@@ -1,6 +1,8 @@
 package com.hoomanholding.jpamanager.model.api
 
 import com.hoomanholding.jpamanager.model.data.request.LoginRequestModel
+import com.hoomanholding.jpamanager.model.data.request.OrderRequestModel
+import com.hoomanholding.jpamanager.model.data.response.order.OrderResponseModel
 import com.hoomanholding.jpamanager.model.data.response.user.LoginResponseModel
 import com.hoomanholding.jpamanager.model.data.response.user.UserInfoResponseModel
 import com.hoomanholding.jpamanager.model.data.response.user.UserPermissionResponseModel
@@ -33,5 +35,12 @@ interface Api {
     suspend fun requestUserPermission(
         @Header("Authorization") token : String
     ) : Response<UserPermissionResponseModel>
+
+
+    @POST("$v1/ManagerAppValidation/managerApp-Validation-Orders-View")
+    suspend fun requestGetOrder(
+        @Body request: OrderRequestModel,
+        @Header("Authorization") token : String
+    ): Response<OrderResponseModel>
 
 }

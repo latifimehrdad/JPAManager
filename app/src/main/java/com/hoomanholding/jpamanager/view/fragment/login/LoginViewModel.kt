@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpamanager.JpaViewModel
 import com.hoomanholding.jpamanager.R
+import com.hoomanholding.jpamanager.model.data.enums.SystemTypeEnum
 import com.hoomanholding.jpamanager.model.data.request.LoginRequestModel
 import com.hoomanholding.jpamanager.model.repository.LoginRepository
 import com.hoomanholding.jpamanager.tools.CompanionValues
@@ -35,7 +36,7 @@ class LoginViewModel @Inject constructor(
 
 
     //---------------------------------------------------------------------------------------------- login
-    fun login(fromFingerPrint: Boolean, deviceID: String) {
+    fun login(fromFingerPrint: Boolean, androidId: String) {
         if (fromFingerPrint)
             setUserNamePasswordFromSharePreferences()
         var valueIsEmpty = false
@@ -48,19 +49,21 @@ class LoginViewModel @Inject constructor(
             valueIsEmpty = true
         }
         if (!valueIsEmpty)
-            requestLogin(deviceID)
+            requestLogin(androidId)
     }
     //---------------------------------------------------------------------------------------------- login
 
 
     //---------------------------------------------------------------------------------------------- requestLogin
-    private fun requestLogin(deviceID: String) {
+    private fun requestLogin(androidId: String) {
         job = CoroutineScope(IO + exceptionHandler()).launch {
             if (userName.value.isNullOrEmpty() || password.value.isNullOrEmpty())
                 setMessage(resourcesProvider.getString(R.string.dataSendingIsEmpty))
             else {
                 val response = repository.requestLogin(
-                    LoginRequestModel(userName.value!!, password.value!!)
+                    LoginRequestModel(
+                        userName.value!!, password.value!!, SystemTypeEnum.managerapp, androidId
+                    )
                 )
                 if (response?.isSuccessful == true) {
                     val loginResponse = response.body()

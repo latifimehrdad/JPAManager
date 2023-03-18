@@ -218,9 +218,9 @@ class LoginFragment(override var layout: Int = R.layout.fragment_login) :
         if (context == null || binding.buttonLogin.isLoading)
             return
         startLoading()
-        val deviceID =
+        val androidId =
             Settings.Secure.getString(requireContext().contentResolver, Settings.Secure.ANDROID_ID)
-        loginViewModel.login(fromFingerPrint, deviceID)
+        loginViewModel.login(fromFingerPrint, androidId)
     }
     //---------------------------------------------------------------------------------------------- login
 
