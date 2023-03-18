@@ -2,6 +2,7 @@ package com.hoomanholding.jpamanager.model.api
 
 import com.hoomanholding.jpamanager.model.data.request.LoginRequestModel
 import com.hoomanholding.jpamanager.model.data.request.OrderRequestModel
+import com.hoomanholding.jpamanager.model.data.response.order.DetailOrderResponseModel
 import com.hoomanholding.jpamanager.model.data.response.order.OrderResponseModel
 import com.hoomanholding.jpamanager.model.data.response.user.LoginResponseModel
 import com.hoomanholding.jpamanager.model.data.response.user.UserInfoResponseModel
@@ -42,5 +43,12 @@ interface Api {
         @Body request: OrderRequestModel,
         @Header("Authorization") token : String
     ): Response<OrderResponseModel>
+
+
+    @GET("$v1/ManagerAppValidation/managerApp-Validation-OrderDetails-View")
+    suspend fun requestOrderDetail(
+        @Query("orderId") orderId: Long,
+        @Header("Authorization") token : String
+    ): Response<DetailOrderResponseModel>
 
 }

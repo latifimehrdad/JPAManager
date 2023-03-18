@@ -59,6 +59,10 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
         viewModel.orderLiveData.observe(viewLifecycleOwner){
             setAdapter(it)
         }
+
+        viewModel.detailOrderLiveData.observe(viewLifecycleOwner){
+            showMessage("count of product is ${it.size}")
+        }
     }
     //---------------------------------------------------------------------------------------------- observeLiveData
 
@@ -91,7 +95,7 @@ class InvoiceFragment(override var layout: Int = R.layout.fragment_invoice) :
     private fun setAdapter(items: List<OrderModel>) {
         val detail = object : OrderHolder.Click {
             override fun orderDetail(item: OrderModel) {
-
+                viewModel.requestOrderDetail(item.id)
             }
         }
         val adapter = OrderAdapter(items, detail)

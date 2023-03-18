@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpamanager.JpaViewModel
 import com.hoomanholding.jpamanager.R
 import com.hoomanholding.jpamanager.model.data.request.OrderRequestModel
+import com.hoomanholding.jpamanager.model.data.response.order.DetailOrderModel
 import com.hoomanholding.jpamanager.model.data.response.order.OrderModel
 import com.hoomanholding.jpamanager.model.repository.OrderRepository
 import com.hoomanholding.jpawarehose.di.ResourcesProvider
@@ -28,6 +29,9 @@ class InvoiceViewModel @Inject constructor(
         MutableLiveData<List<OrderModel>>()
     }
 
+    val detailOrderLiveData: MutableLiveData<List<DetailOrderModel>> by lazy {
+        MutableLiveData<List<DetailOrderModel>>()
+    }
 
 
     //---------------------------------------------------------------------------------------------- requestGetOrder
@@ -37,11 +41,15 @@ class InvoiceViewModel @Inject constructor(
                 "14011001", "14011230", 0, 0
             )
             val response = orderRepository.requestGetOrder(request)
-            if (response?.isSuccessful == true){
+            if (response?.isSuccessful == true) {
                 val body = response.body()
                 body?.let {
                     if (!it.hasError)
-                        orderLiveData.postValue(it.data)
+                        it.data?.let { data ->
+                            orderLiveData.postValue(data)
+                        } ?: run {
+                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                        }
                     else
                         setMessage(it.message)
                 } ?: run {
@@ -52,6 +60,32 @@ class InvoiceViewModel @Inject constructor(
         }
     }
     //---------------------------------------------------------------------------------------------- requestGetOrder
+
+
+
+    //---------------------------------------------------------------------------------------------- requestOrderDetail
+    fun requestOrderDetail(orderId: Long) {
+        job = CoroutineScope(IO + exceptionHandler()).launch {
+            val response = orderRepository.requestOrderDetail(orderId)
+            if (response?.isSuccessful == true) {
+                val body = response.body()
+                body?.let {
+                    if (!it.hasError)
+                        it.data?.let { data ->
+                            detailOrderLiveData.postValue(data)
+                        } ?: run {
+                            setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                        }
+                    else
+                        setMessage(it.message)
+                } ?: run {
+                    setMessage(resourcesProvider.getString(R.string.dataReceivedIsEmpty))
+                }
+            } else
+                setMessage(response)
+        }
+    }
+    //---------------------------------------------------------------------------------------------- requestOrderDetail
 
 
 }

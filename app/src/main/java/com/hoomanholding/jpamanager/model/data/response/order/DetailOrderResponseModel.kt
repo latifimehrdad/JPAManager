@@ -7,8 +7,8 @@ import com.hoomanholding.jpamanager.model.data.response.BaseResponseAbstractMode
  * create by m-latifi on 3/18/2023
  */
 
-data class OrderResponseModel(
+data class DetailOrderResponseModel(
     override val hasError: Boolean,
     override val message: String,
-    val data: List<OrderModel>?
+    val data: List<DetailOrderModel>?
 ): BaseResponseAbstractModel()
