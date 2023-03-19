@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import com.hoomanholding.jpamanager.JpaViewModel
 import com.hoomanholding.jpamanager.R
-import com.hoomanholding.jpamanager.model.data.enums.SystemTypeEnum
 import com.hoomanholding.jpamanager.model.data.request.LoginRequestModel
 import com.hoomanholding.jpamanager.model.repository.LoginRepository
 import com.hoomanholding.jpamanager.tools.CompanionValues
@@ -62,7 +61,7 @@ class LoginViewModel @Inject constructor(
             else {
                 val response = repository.requestLogin(
                     LoginRequestModel(
-                        userName.value!!, password.value!!, SystemTypeEnum.managerapp, androidId
+                        userName.value!!, password.value!!, "managerapp", androidId
                     )
                 )
                 if (response?.isSuccessful == true) {

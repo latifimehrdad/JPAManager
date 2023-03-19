@@ -1,7 +1,5 @@
 package com.hoomanholding.jpamanager.model.data.request
 
-import com.hoomanholding.jpamanager.model.data.enums.SystemTypeEnum
-
 /**
  * Created by m-latifi on 11/9/2022.
  */
@@ -9,6 +7,6 @@ import com.hoomanholding.jpamanager.model.data.enums.SystemTypeEnum
 data class LoginRequestModel(
     val userName : String,
     val password : String,
-    val SystemType: SystemTypeEnum,
+    val SystemType: String,
     val AndroidId: String
 )
